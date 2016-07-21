@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patterns Emerge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/css/sortable-theme-light.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pnl.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/js/sortable.min.js"></script>
+    <script src="scripts/pathseg.js"></script>
+    <script src="scripts/python-format.js"></script>
+</head>
+<body>
+<div class="logoHeader">
+    <div class="headertext"><h1><b><i>Restate My Assumptions</i></b></h1></div>
+</div>
+<div class="container" id="oaplbox">
+    <div class="chartHeader" id="oaplheader">
+        <h3><b>Overall Profit/Loss By Day</b></h3>
+        <p class="instructions">Running balance by day.</p>
+        <h2 class="loadingbar" id="oaplload">Loading Live Data. Please Wait...</h2>
+    </div>
+    <div class="barChart" id="oaplchart"></div>
+</div>
+
+<div class="instructions" id="footer">
+    <p id="foottext"></p>
+</div>
+<script src="scripts/ubiquitin.js"></script>
+<script src="scripts/pnl.js"></script>
+</body>
+</html>
