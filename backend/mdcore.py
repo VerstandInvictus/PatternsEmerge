@@ -1,22 +1,9 @@
 import codecs
-import datetime
 import config
-import requests
-import cookielib
-import mechanize
-import re
-import os
 import unidecode
-import hashlib
-import urllib2
-from werkzeug import urls
-from bs4 import BeautifulSoup
-from math import ceil
-import pprint
+from pyvirtualdisplay import Display
 from time import sleep
-
-user_agent = (
-    'User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36')
+from selenium import webdriver
 
 
 class mdLogger:
@@ -31,32 +18,41 @@ class mdLogger:
 
 
 class marketdelta:
-    def __init__(self, logobj):
+    def __init__(self, logobj, strategy):
         self.logger = logobj
-        self.user = config.mdUser
-        self.password = config.mdPass
+        self.user = config.mdUsers[strategy]
+        self.password = config.mdPasses[strategy]
+        self.display = Display(visible=0, size=(800, 600))
+        self.display.start()
         self.br = self.loginToMD()
 
     def loginToMD(self):
-        br = mechanize.Browser(factory=mechanize.RobustFactory())
-        br.set_handle_robots(False)
-        br.addheaders = [user_agent]
-        resp = br.open("https://app.marketdelta.com/signon")
-        br._factory.is_html = True
-        br.select_form(nr=0)
-        br.form['email'] = self.user
-        br.form['password'] = self.password
-        br.submit()
-        print "logged in"
-        return br
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference("general.useragent.override", user_agent)
+        browser = webdriver.Firefox(profile)
+        browser.implicitly_wait(15)
+        browser.get('https://app.marketdelta.com/signon')
+        emailfield = browser.find_element_by_id('email')
+        emailfield.send_keys(self.user)
+        pwfield = browser.find_element_by_name('password')
+        pwfield.send_keys(self.password)
+        submitbutton = browser.find_element_by_xpath(
+            '//*[@id="frame-content"]/form/div[3]/div/input')
+        submitbutton.click()
+        sleep(15)  # give it time to load the order list
+        self.logger.logentry("Logged in successfully", 'info')
+        return browser
 
-    def readPage(self):
-        self.br.open('https://app.marketdelta.com/trading')
-        soup = BeautifulSoup(self.br.response().read())
-        return soup
+    def getOrderList(self):
+        orderlist = self.br.find_element_by_class_name('watchlist')
+        otable = orderlist.get_attribute('innerHTML')
+        self.logger.logentry("Got order list", 'info')
+        return otable
 
-if __name__ == "__main__":
-    logger = mdLogger('junk.log')
-    md = marketdelta(logger)
-    soup = md.readPage()
-    pprint.pprint(soup)
+    def exit(self):
+        self.br.quit()
+        self.display.stop()
+        self.logger.logentry("Quit FF and Xvfb", 'info')
+
+if __name__ == '__main__':
+    exit()
