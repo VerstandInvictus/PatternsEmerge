@@ -6,7 +6,6 @@ from itertools import izip
 import pymongo
 from flask import Flask, json, Response, request
 from flask_cors import CORS
-from flask_compress import Compress
 import os
 import arrow
 import mdcore
@@ -27,7 +26,6 @@ app = Flask(__name__)
 CORS(app, headers=['Content-Type'], supports_credentials=True)
 # live app headers
 # CORS(app)
-Compress(app)
 
 logfile = os.path.join("logs", "patterns.log")
 
@@ -109,4 +107,4 @@ def listTrades(strategy):
     )), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port='5001', debug=True)
