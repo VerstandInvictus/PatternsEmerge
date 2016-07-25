@@ -91,7 +91,8 @@ def restateAssumptions():
 
 @app.route('/update/<strategy>')
 def updateTrades(strategy):
-    logger = mdcore.mdLogger(os.path.join(os.curdir, 'logs', 'mdcore.log'))
+    logWrite('test log')
+    logger = mdcore.mdLogger(os.path.join('logs', 'mdcore.log'))
     md = mdcore.marketdelta(logger, strategy)
     ordertable = md.getOrderList()
     md.exit()
