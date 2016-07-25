@@ -42,13 +42,13 @@ class marketdelta:
             '//*[@id="frame-content"]/form/div[3]/div/input')
         submitbutton.click()
         sleep(15)  # give it time to load the order list
-        self.logger.logentry("Logged in successfully", 'info')
+        self.logger.logEntry("Logged in successfully", 'info')
         return browser
 
     def getOrderList(self):
         orderlist = self.br.find_element_by_class_name('watchlist')
         otable = orderlist.get_attribute('innerHTML')
-        self.logger.logentry("Got order list", 'info')
+        self.logger.logEntry("Got order list", 'info')
         return otable
 
     def exit(self):
