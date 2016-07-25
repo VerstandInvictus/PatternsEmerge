@@ -6,8 +6,8 @@ from time import sleep
 from selenium import webdriver
 
 user_agent = (
-    'User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 '
-                  '(KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36')
+    'User-Agent', '"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 '
+                  '(KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"')
 
 class mdLogger:
     def __init__(self, logfile):
