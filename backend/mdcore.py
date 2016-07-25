@@ -13,7 +13,7 @@ class mdLogger:
         self.logfile = logfile
 
     def logEntry(self, entry, level):
-        with codecs.open(self.logfile, mode='a', encoding='utf-8') as log:
+        with codecs.open(self.logfile, mode='a+', encoding='utf-8') as log:
             log.write(entry + '\n')
         if 'progress' in level:
             print unidecode.unidecode(entry)

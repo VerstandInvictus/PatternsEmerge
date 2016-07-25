@@ -29,7 +29,7 @@ logfile = os.path.join("logs", "patterns.log")
 
 def logWrite(item):
     datestr = arrow.utcnow().to("US/Pacific").format(timeformat) + ": "
-    with open(logfile, "a") as log:
+    with open(logfile, "a+") as log:
         logstr = datestr + item + "\n"
         log.write(logstr)
     return logstr
@@ -91,7 +91,6 @@ def restateAssumptions():
 
 @app.route('/update/<strategy>')
 def updateTrades(strategy):
-    logWrite('test log')
     logger = mdcore.mdLogger(os.path.join('logs', 'mdcore.log'))
     md = mdcore.marketdelta(logger, strategy)
     ordertable = md.getOrderList()
