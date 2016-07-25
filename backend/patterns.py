@@ -29,6 +29,7 @@ CORS(app, headers=['Content-Type'], supports_credentials=True)
 
 logfile = os.path.join("logs", "patterns.log")
 
+
 def logWrite(item):
     datestr = arrow.utcnow().to("US/Pacific").format(timeformat) + ": "
     with open(logfile, "a") as log:
@@ -107,4 +108,4 @@ def listTrades(strategy):
     )), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5001', debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
