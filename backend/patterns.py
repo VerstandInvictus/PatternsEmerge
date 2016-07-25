@@ -102,14 +102,14 @@ def updateTrades(strategy):
     rows = extractOrdersFromTable(ordersoup)
     trades = (assembleTrades(rows))
     pprint.pprint(trades)
-    tradeDb.strategy.insert_many(trades)
+    tradeDb[strategy].insert_many(trades)
     return "Updated {0}".format(strategy), 200
 
 
 @app.route('/list/<strategy>')
 def listTrades(strategy):
     logWrite("requested fridged teardowns")
-    return jsonWrapper(tradeDb.strategy.find(
+    return jsonWrapper(tradeDb[strategy].find(
         filter={}
     )), 200
 
