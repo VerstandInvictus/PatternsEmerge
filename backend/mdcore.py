@@ -6,8 +6,7 @@ from time import sleep
 from selenium import webdriver
 
 user_agent = (
-    'User-Agent', '"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 '
-                  '(KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"')
+    'User-Agent', '"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"')
 
 class mdLogger:
     def __init__(self, logfile):
@@ -27,12 +26,12 @@ class marketdelta:
         self.password = config.mdPasses[strategy]
         self.display = Display(visible=0, size=(800, 600))
         self.display.start()
+        self.profile = webdriver.FirefoxProfile()
         self.br = self.loginToMD()
 
     def loginToMD(self):
-        profile = webdriver.FirefoxProfile()
-        profile.set_preference("general.useragent.override", user_agent)
-        browser = webdriver.Firefox(profile)
+        self.profile.set_preference("general.useragent.override", user_agent)
+        browser = webdriver.Firefox(self.profile)
         browser.implicitly_wait(15)
         browser.get('https://app.marketdelta.com/signon')
         emailfield = browser.find_element_by_id('email')
