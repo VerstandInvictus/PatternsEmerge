@@ -1,2 +1,2 @@
 #!/bin/bash
-nohup python backend\patterns.py >> patternsh.log &
+nohup python backend/patterns.py >> patternsh.log &
