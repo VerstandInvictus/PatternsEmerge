@@ -100,7 +100,7 @@ def updateTrades(strategy):
     trades = (assembleTrades(rows))
     pprint.pprint(trades)
     tradeDb[strategy].insert_many(trades)
-    return "Updated {0}".format(strategy), 200
+    return jsonWrapper(trades, isCursor=0), 200
 
 
 @app.route('/list/<strategy>')
