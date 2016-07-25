@@ -100,6 +100,7 @@ def updateTrades(strategy):
     trades = (assembleTrades(rows))
     pprint.pprint(trades)
     tradeDb[strategy].insert_many(trades)
+    logWrite("wrote trades to DB: {0}".format(trades))
     return jsonWrapper(trades, isCursor=0), 200
 
 
