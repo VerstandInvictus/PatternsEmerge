@@ -87,6 +87,11 @@ def assembleTrades(trows):
     return trades
 
 
+@app.route('/')
+def restateAssumptions():
+    return 'First: Restate your assumptions.'
+
+
 @app.route('/update/<strategy>')
 def updateTrades(strategy):
     logger = mdcore.mdLogger(os.path.join('logs', 'mdcore.log'))
@@ -98,6 +103,7 @@ def updateTrades(strategy):
     trades = (assembleTrades(rows))
     pprint.pprint(trades)
     tradeDb.strategy.insert_many(trades)
+    return "Updated {0}".format(strategy), 200
 
 
 @app.route('/list/<strategy>')
