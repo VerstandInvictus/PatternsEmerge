@@ -109,7 +109,7 @@ def assembleTrades(trows):
         tdict['exitTime'] = trexit['Updated'].split(' ')[0]
         tdict['date'] = ' '.join(enter['Updated'].split(' ')[1:])
         tdict['_id'] = ''.join((tdict['date'], tdict['exitTime'],
-                                tdict['entry'], tdict['exit'], tdict['copy']))
+                                tdict['entry'], tdict['exit'], enter['copy']))
         trades.append(tdict)
     return trades
 
