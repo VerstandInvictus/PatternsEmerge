@@ -108,7 +108,7 @@ def updateTrades(strategy):
     pprint.pprint(trades)
     res = tradeDb[strategy].insert_many(deepcopy(trades))
     logWrite("wrote trades to DB: {0}".format(trades))
-    return jsonWrapper(trades, isCursor=0), 200
+    return jsonWrapper(rows, isCursor=0), 200
 
 
 @app.route('/list/<strategy>')
