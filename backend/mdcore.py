@@ -55,7 +55,7 @@ class marketdelta:
     def exit(self):
         self.br.quit()
         self.display.stop()
-        self.logger.logentry("Quit FF and Xvfb", 'info')
+        self.logger.logEntry("Quit FF and Xvfb", 'info')
 
 if __name__ == '__main__':
     exit()
