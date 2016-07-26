@@ -59,15 +59,18 @@ def jsonWrapper(inputStructure, isCursor=1):
 def extractOrdersFromTable(soup):
     trows = list()
     fieldNames = list()
-    for head in soup.find_all('th'):
-        fieldNames.append(head.button.text)
-    for row in soup.find_all('tr')[1:]:
-        rlist = dict()
-        for col, name in zip(row.find_all('td'), fieldNames):
-            rlist[name] = col.text
-        if rlist['Status'] == 'Filled':
-            trows.append(rlist)
-    return trows
+    if not soup.find_all(text="There are no orders to display."):
+        for head in soup.find_all('th'):
+            fieldNames.append(head.button.text)
+        for row in soup.find_all('tr')[1:]:
+            rlist = dict()
+            for col, name in zip(row.find_all('td'), fieldNames):
+                rlist[name] = col.text
+            if rlist['Status'] == 'Filled':
+                trows.append(rlist)
+        return trows
+    else:
+        return None
 
 
 def assembleTrades(trows):
@@ -126,6 +129,9 @@ def updateTrades(strategy):
     md.exit()
     ordersoup = BeautifulSoup(ordertable, 'html.parser')
     rows = extractOrdersFromTable(ordersoup)
+    if not rows:
+        logWrite("No trades found.")
+        return "No trades found."
     trades = (assembleTrades(rows))
     for trade in trades:
         res = tradeDb[strategy].replace_one(
