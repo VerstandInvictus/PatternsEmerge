@@ -15,7 +15,7 @@ class mdLogger:
 
     def logEntry(self, entry, level):
         print os.curdir
-        print os.pardir(os.curdir)
+        print os.pardir
         with codecs.open(self.logfile, mode='a+', encoding='utf-8') as log:
             log.write(entry + '\n')
         if 'progress' in level:
