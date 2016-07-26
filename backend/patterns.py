@@ -144,12 +144,14 @@ def updateTrades(strategy):
 
 @app.route('/list/<strategy>')
 def listTrades(strategy):
+    tout = list()
     trades = tradeDb[strategy].find(
         filter={}
     )
     for t in trades:
         t['total'] *= config.mdMultipliers[strategy]
-    return jsonWrapper(trades, isCursor=0), 200
+        tout.append(t)
+    return jsonWrapper(tout, isCursor=0), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
