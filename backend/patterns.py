@@ -137,7 +137,6 @@ def updateTrades(strategy):
 
 @app.route('/list/<strategy>')
 def listTrades(strategy):
-    logWrite("requested fridged teardowns")
     return jsonWrapper(tradeDb[strategy].find(
         filter={}
     )), 200
