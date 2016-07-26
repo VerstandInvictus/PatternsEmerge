@@ -24,7 +24,11 @@ CORS(app, headers=['Content-Type'], supports_credentials=True)
 # live app headers
 # CORS(app)
 
-logfile = os.path.join("logs", "patterns.log")
+logdir = os.path.join("var", "repos", "patterns", "PatternsEmerge",
+                 "backend", "logs")
+
+logfile = os.path.join(logdir, "patterns.log")
+mdlog = os.path.join(logdir, "mdcore.log")
 
 
 def logWrite(item):
@@ -91,7 +95,7 @@ def restateAssumptions():
 
 @app.route('/update/<strategy>')
 def updateTrades(strategy):
-    logger = mdcore.mdLogger(os.path.join('logs', 'mdcore.log'))
+    logger = mdcore.mdLogger(mdlog)
     md = mdcore.marketdelta(logger, strategy)
     ordertable = md.getOrderList()
     md.exit()
