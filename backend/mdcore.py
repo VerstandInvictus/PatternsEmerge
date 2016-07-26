@@ -3,7 +3,7 @@ import config
 import unidecode
 from pyvirtualdisplay import Display
 from time import sleep
-from selenium import webdriver
+from selenium import webdriver, common
 
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36' \
              ' (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
@@ -47,9 +47,13 @@ class marketdelta:
         return browser
 
     def getOrderList(self):
-        orderlist = self.br.find_element_by_class_name('watchlist')
-        otable = orderlist.get_attribute('innerHTML')
-        self.logger.logEntry("Got order list", 'info')
+        try:
+            orderlist = self.br.find_element_by_class_name('watchlist')
+            otable = orderlist.get_attribute('innerHTML')
+            self.logger.logEntry("Got order list", 'info')
+        except common.exceptions.UnexpectedAlertPresentException:
+            self.logger.logEntry('No orders to get', 'info')
+            otable = "<th></th><tr><td></td></tr>"
         return otable
 
     def exit(self):
