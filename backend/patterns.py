@@ -128,10 +128,10 @@ def updateTrades(strategy):
     ordersoup = BeautifulSoup(ordertable, 'html.parser')
     rows = extractOrdersFromTable(ordersoup)
     trades = (assembleTrades(rows))
-    pprint.pprint(trades)
     res = tradeDb[strategy].insert_many(deepcopy(trades))
-    logWrite("wrote trades to DB: {0}".format(trades))
-    return jsonWrapper(trades, isCursor=0), 200
+    tradereturn = [trades, res]
+    logWrite("wrote trades to DB: {0}".format(tradereturn))
+    return jsonWrapper(tradereturn, isCursor=0), 200
 
 
 @app.route('/list/<strategy>')
