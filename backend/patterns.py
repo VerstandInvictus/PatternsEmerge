@@ -9,6 +9,7 @@ from flask_cors import CORS
 import os
 import arrow
 import mdcore
+from copy import deepcopy
 
 cgitb.enable()
 
@@ -105,7 +106,7 @@ def updateTrades(strategy):
     rows = extractOrdersFromTable(ordersoup)
     trades = (assembleTrades(rows))
     pprint.pprint(trades)
-    res = tradeDb[strategy].insert_many(trades)
+    res = tradeDb[strategy].insert_many(deepcopy(trades))
     logWrite("wrote trades to DB: {0}".format(trades))
     return jsonWrapper(trades, isCursor=0), 200
 
