@@ -24,11 +24,13 @@ CORS(app, headers=['Content-Type'], supports_credentials=True)
 # live app headers
 # CORS(app)
 
-logdir = os.path.join("var", "repos", "patterns", "PatternsEmerge",
-                 "backend", "logs")
+logdir = os.path.join("/", "var", "repos", "patterns", "PatternsEmerge",
+                      "backend", "logs")
 
 logfile = os.path.join(logdir, "patterns.log")
 mdlog = os.path.join(logdir, "mdcore.log")
+
+print logdir
 
 
 def logWrite(item):
