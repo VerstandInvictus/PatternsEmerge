@@ -105,7 +105,7 @@ def updateTrades(strategy):
     rows = extractOrdersFromTable(ordersoup)
     trades = (assembleTrades(rows))
     pprint.pprint(trades)
-    tradeDb[strategy].insert_many(trades)
+    res = tradeDb[strategy].insert_many(trades)
     logWrite("wrote trades to DB: {0}".format(trades))
     return jsonWrapper(trades, isCursor=0), 200
 
