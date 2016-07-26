@@ -74,12 +74,12 @@ def assembleTrades(trows):
     splitrows = list()
     trades = list()
     for order in trows:
-        order['Copy'] = 0
+        order['Copy'] = '0'
         if int(order['Qty']) > 1:
             for i in range(1, int(order['Qty'])):
                 splitorder = deepcopy(order)
                 splitorder['Qty'] = '1'
-                splitorder['Copy'] = i
+                splitorder['Copy'] = str(i)
                 splitrows.append(splitorder)
             order['Qty'] = '1'
             splitrows.append(order)
@@ -109,7 +109,7 @@ def assembleTrades(trows):
         tdict['exitTime'] = trexit['Updated'].split(' ')[0]
         tdict['date'] = ' '.join(enter['Updated'].split(' ')[1:])
         tdict['_id'] = ''.join((tdict['date'], tdict['exitTime'],
-                                tdict['entry'], tdict['exit'], enter['Copy']))
+                                str(tdict['total']), enter['Copy']))
         trades.append(tdict)
     return trades
 
