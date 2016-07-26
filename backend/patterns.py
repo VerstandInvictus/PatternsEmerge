@@ -128,8 +128,10 @@ def updateTrades(strategy):
     rows = extractOrdersFromTable(ordersoup)
     trades = (assembleTrades(rows))
     for trade in trades:
-        tradeDb[strategy].replace_one({"_id": trade['_id']}, trade, True)
+        res = tradeDb[strategy].replace_one(
+            {"_id": trade['_id']}, trade, True)
         logWrite("wrote trade to DB: {0}".format(trade))
+        logWrite("response from Mongo: {0}".format(res))
     return jsonWrapper(trades, isCursor=0), 200
 
 
