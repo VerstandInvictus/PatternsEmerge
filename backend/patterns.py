@@ -128,7 +128,7 @@ def updateTrades(strategy):
     rows = extractOrdersFromTable(ordersoup)
     trades = (assembleTrades(rows))
     for trade in trades:
-        tradeDb[strategy].replace_one(trade)
+        tradeDb[strategy].replace_one({"_id": trade['_id']}, trade, True)
         logWrite("wrote trade to DB: {0}".format(trade))
     return jsonWrapper(trades, isCursor=0), 200
 
