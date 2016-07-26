@@ -4,6 +4,7 @@ import unidecode
 from pyvirtualdisplay import Display
 from time import sleep
 from selenium import webdriver
+import os
 
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36' \
              ' (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
@@ -13,6 +14,8 @@ class mdLogger:
         self.logfile = logfile
 
     def logEntry(self, entry, level):
+        print os.curdir
+        print os.pardir(os.curdir)
         with codecs.open(self.logfile, mode='a+', encoding='utf-8') as log:
             log.write(entry + '\n')
         if 'progress' in level:
