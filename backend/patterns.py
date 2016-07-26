@@ -71,22 +71,41 @@ def extractOrdersFromTable(soup):
 
 
 def assembleTrades(trows):
-    sorted_rows = sorted(trows, key=operator.itemgetter('Updated'))
-    a = iter(sorted_rows)
+    splitrows = list()
     trades = list()
-    for trade in izip(a, a):
+    for order in trows:
+        if int(order['Qty']) > 1:
+            for i in range(1, int(order['Qty'])):
+                splitorder = deepcopy(order)
+                splitorder['Qty'] = '1'
+                splitrows.append(splitorder)
+            order['Qty'] = '1'
+            splitrows.append(order)
+        else:
+            splitrows.append(order)
+    sorted_rows = sorted(splitrows, key=operator.itemgetter('Updated'))
+    while len(sorted_rows) > 0:
+        enter = sorted_rows.pop(0)
+        if enter['Side'] == "Sell":
+            match = "Buy"
+        elif enter['Side'] == "Buy":
+            match = "Sell"
+        for i, order in enumerate(sorted_rows):
+            if order['Side'] == match:
+                trexit = sorted_rows.pop(i)
+                break
         tdict = dict()
-        tdict['entry'] = float(trade[0]['Avg. Fill'])
-        tdict['exit'] = float(trade[1]['Avg. Fill'])
-        if trade[0]['Side'] == 'Sell':
+        tdict['entry'] = float(enter['Avg. Fill'])
+        tdict['exit'] = float(trexit['Avg. Fill'])
+        if enter['Side'] == 'Sell':
             tdict['total'] = tdict['entry'] - tdict['exit']
             tdict['direction'] = 'Short'
-        elif trade[0]['Side'] == 'Buy':
+        elif enter['Side'] == 'Buy':
             tdict['total'] = tdict['exit'] - tdict['entry']
             tdict['direction'] = 'Long'
-        tdict['entryTime'] = trade[0]['Updated'].split(' ')[0]
-        tdict['exitTime'] = trade[1]['Updated'].split(' ')[0]
-        tdict['date'] = ' '.join(trade[0]['Updated'].split(' ')[1:])
+        tdict['entryTime'] = enter['Updated'].split(' ')[0]
+        tdict['exitTime'] = trexit['Updated'].split(' ')[0]
+        tdict['date'] = ' '.join(enter['Updated'].split(' ')[1:])
         trades.append(tdict)
     return trades
 
@@ -108,7 +127,7 @@ def updateTrades(strategy):
     pprint.pprint(trades)
     res = tradeDb[strategy].insert_many(deepcopy(trades))
     logWrite("wrote trades to DB: {0}".format(trades))
-    return jsonWrapper(rows, isCursor=0), 200
+    return jsonWrapper(trades, isCursor=0), 200
 
 
 @app.route('/list/<strategy>')
