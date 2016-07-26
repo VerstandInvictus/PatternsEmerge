@@ -10,6 +10,7 @@ import os
 import arrow
 import mdcore
 from copy import deepcopy
+import config
 
 cgitb.enable()
 
@@ -143,9 +144,12 @@ def updateTrades(strategy):
 
 @app.route('/list/<strategy>')
 def listTrades(strategy):
-    return jsonWrapper(tradeDb[strategy].find(
+    trades = tradeDb[strategy].find(
         filter={}
-    )), 200
+    )
+    for t in trades:
+        t['total'] *= config.mdMultipliers[strategy]
+    return jsonWrapper(trades, isCursor=0), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
