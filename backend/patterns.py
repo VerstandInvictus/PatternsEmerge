@@ -167,14 +167,12 @@ def listOapl(strategy):
     retlist = list()
     retlist.append(
         {
-            "date": "Jul 25",
-            "total": 325,
+            "date": "Jul 11",
+            "total": 0,
         }
     )
     trades = list(tradeDb[strategy].find(
         filter={}
-    ).sort(
-        [("datetime", 1)]
     ))
     for t in trades:
         found = 0
@@ -195,7 +193,8 @@ def listOapl(strategy):
     mint = min([d['total'] for d in retlist])
     for day in retlist:
         day['color'] = gradients.findColor(mint, maxt, day['total'])
-    return jsonWrapper(retlist, isCursor=0), 200
+    return jsonWrapper(sorted(retlist, key=lambda x: x['datetime']),
+                              isCursor=0), 200
 
 
 if __name__ == '__main__':
