@@ -217,8 +217,8 @@ def genTotals(strategy):
     totals['lost'] = len(loses)
     totals['best'] = max([x['total'] for x in trades])
     totals['worst'] = min([x['total'] for x in trades])
-    totals['avgwin'] = sum(wins) / totals['won']
-    totals['avgloss'] = sum(loses) / totals['lost']
+    totals['avgwin'] = sum(wins) / len(totals['won'])
+    totals['avgloss'] = sum(loses) / len(totals['lost'])
     totals['winrate'] = len(wins) / len(trades)
     totals['roi'] = 2500 + sum(wins) - sum(loses)
     totals['rredge'] = totals['avgwin'] + totals['avgloss']
