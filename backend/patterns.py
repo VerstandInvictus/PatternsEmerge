@@ -164,7 +164,7 @@ def listOapl(strategy):
     retlist.append(
         {
             "date": "Jul 25",
-            "total": 0,
+            "total": 325,
         }
     )
     trades = tradeDb[strategy].find(

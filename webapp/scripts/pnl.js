@@ -2,12 +2,12 @@ var $overlay = $('<div class=overlay></div>')
 var $listContainer = $('<div class=centeredList></div>')
 
 
-function chartgen (dataobj, bind) {
+function chartgen (dataobj, bind, type) {
     c3.generate({
         bindto: bind,
         data: {
             json: dataobj,
-            type: 'bar',
+            type: type,
             xFormat: null,
             keys: {
                 x: 'date',
@@ -55,11 +55,11 @@ $.ajaxSetup({
 $.getJSON(apiRoot + 'oapl/open12-6', function (data) {
     $('#oaplload').hide();
     oapldata = data
-    oaplchart = chartgen(oapldata, "#oaplchart")
+    oaplchart = chartgen(oapldata, "#oaplchart", 'area')
 });
 
 $.getJSON(apiRoot + 'list/open12-6', function (data) {
     $('#tradesload').hide();
     tradesdata = data
-    tradeschart = chartgen(tradesdata, "#tradeschart")
+    tradeschart = chartgen(tradesdata, "#tradeschart", 'bar')
 });
