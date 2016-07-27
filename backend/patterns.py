@@ -174,8 +174,8 @@ def listOapl(strategy):
         found = 0
         t['total'] *= config.mdMultipliers[strategy]
         for i, day in enumerate(retlist):
-            if day['Date'] == t['date']:
-                retlist[i]['Total'] += t['total']
+            if day['date'] == t['date']:
+                retlist[i]['total'] += t['total']
                 found = 1
                 break
         if found == 0:

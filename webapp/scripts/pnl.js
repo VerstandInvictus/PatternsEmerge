@@ -57,3 +57,9 @@ $.getJSON(apiRoot + 'oapl/open12-6', function (data) {
     oapldata = data
     oaplchart = chartgen(oapldata, "#oaplchart")
 });
+
+$.getJSON(apiRoot + 'list/open12-6', function (data) {
+    $('#tradesload').hide();
+    tradesdata = data
+    tradeschart = chartgen(tradesdata, "#tradeschart")
+});
