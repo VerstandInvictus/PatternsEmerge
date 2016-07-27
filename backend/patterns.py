@@ -163,8 +163,8 @@ def listOapl(strategy):
     retlist = list()
     retlist.append(
         {
-            "Date": "Jul 25",
-            "Total": 0,
+            "date": "Jul 25",
+            "total": 0,
         }
     )
     trades = tradeDb[strategy].find(
@@ -181,8 +181,8 @@ def listOapl(strategy):
         if found == 0:
             retlist.append(
                 {
-                    "Date": t['date'],
-                    "Total": t['total']
+                    "date": t['date'],
+                    "total": t['total'] + retlist[-1]['total']
                 }
             )
     return jsonWrapper(retlist, isCursor=0), 200

@@ -14,10 +14,10 @@ function chartgen (dataobj, bind) {
                 value: ['total'],
             },
             color: function (color, d) {
-                if(d.value > 50) {
-                    return "#ff0000";
+                if(d.value > 0 ) {
+                    return "#009933";
                 } else {
-                return "#00ff00";
+                    return "#990000";
                 }
             }
         },
@@ -52,7 +52,7 @@ $.ajaxSetup({
     dataType: "json"
 });
 
-$.getJSON(apiRoot + 'list/open12-6', function (data) {
+$.getJSON(apiRoot + 'oapl/open12-6', function (data) {
     $('#oaplload').hide();
     oapldata = data
     oaplchart = chartgen(oapldata, "#oaplchart")
