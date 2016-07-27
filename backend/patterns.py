@@ -189,8 +189,8 @@ def listOapl(strategy):
                     "total": t['total'] + retlist[-1]['total'],
                 }
             )
-    maxt = pipsToDollars(strategy, max([d['total'] for d in retlist]))
-    mint = pipsToDollars(strategy, min([d['total'] for d in retlist]))
+    maxt = max([pipsToDollars(strategy, d['total']) for d in retlist])
+    mint = min([pipsToDollars(strategy, d['total']) for d in retlist])
     raise IndexError
     for day in retlist:
         day['min'] = mint
