@@ -31,10 +31,10 @@ logdir = os.path.join("/", "var", "repos", "patterns", "PatternsEmerge",
 logfile = os.path.join(logdir, "patterns.log")
 mdlog = os.path.join(logdir, "mdcore.log")
 
-print logdir
 
 def pipsToDollars(strategy, pips):
-    return (pips - config.mdFees[strategy]) * config.mdMultipliers[strategy]
+    return (pips * config.mdMultipliers[strategy]) - config.mdFees[strategy]
+
 
 def logWrite(item):
     datestr = arrow.utcnow().to("US/Pacific").format(timeformat) + ": "
