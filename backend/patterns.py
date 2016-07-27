@@ -152,7 +152,7 @@ def listTrades(strategy):
     maxt = pipsToDollars(strategy, max([t['total'] for t in trades]))
     mint = pipsToDollars(strategy, min([t['total'] for t in trades]))
     for t in trades:
-        t['total'] *= config.mdMultipliers[strategy]
+        t['total'] = pipsToDollars(strategy, t['total'])
         t['datetime'] = arrow.get(
             t['date'] + ' 2016 ' + t['entryTime'],
             'MMM D YYYY H:mm'
@@ -168,8 +168,8 @@ def listOapl(strategy):
     retlist = list()
     retlist.append(
         {
-            "date": "Jul 25",
-            "total": 325,
+            "date": "Jul 11",
+            "total": 0,
         }
     )
     trades = list(tradeDb[strategy].find(
@@ -202,6 +202,29 @@ def listOapl(strategy):
         day['color'] = gradients.findColor(mint, maxt, day['total'])
     return jsonWrapper(retlist, isCursor=0), 200
 
+
+@app.route('/totals/<strategy>')
+def genTotals(strategy):
+    totals = dict()
+    trades = list(tradeDb[strategy].find(
+        filter={}
+    ))
+    for t in trades:
+        t['total'] = pipsToDollars(strategy, t['total'])
+    wins = [x for x in trades if x['total'] > 0]
+    loses = [x for x in trades if x['total'] <= 0]
+    totals['won'] = len(wins)
+    totals['lost'] = len(loses)
+    totals['best'] = max([x['total'] for x in trades])
+    totals['worst'] = min([x['total'] for x in trades])
+    totals['avgwin'] = sum(wins) / totals['won']
+    totals['avgloss'] = sum(loses) / totals['lost']
+    totals['winrate'] = len(wins) / len(trades)
+    totals['roi'] = 2500 + sum(wins) - sum(loses)
+    totals['rredge'] = totals['avgwin'] + totals['avgloss']
+    totals['expect'] = totals['winrate'] * totals['avgwin'] + \
+                       ((1-totals['winrate']) * totals['avgloss'])
+    totals['monthly'] = totals['expect'] * 5 * 4
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
