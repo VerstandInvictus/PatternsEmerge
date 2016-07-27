@@ -189,12 +189,10 @@ def listOapl(strategy):
                     "total": t['total'] + retlist[-1]['total'],
                 }
             )
-    maxt = max([pipsToDollars(strategy, d['total']) for d in retlist])
-    mint = min([pipsToDollars(strategy, d['total']) for d in retlist])
+    maxt = max([d['total'] for d in retlist])
+    mint = min([d['total'] for d in retlist])
     raise IndexError
     for day in retlist:
-        day['min'] = mint
-        day['max'] = maxt
         day['color'] = gradients.findColor(mint, maxt, day['total'])
     return jsonWrapper(retlist, isCursor=0), 200
 
