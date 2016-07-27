@@ -152,7 +152,7 @@ def listTrades(strategy):
         t['total'] *= config.mdMultipliers[strategy]
         t['datetime'] = arrow.get(
             t['date'] + ' 2016 ' + t['entryTime'],
-            'MMM MM YYYY H:mm'
+            'MMM D YYYY H:mm'
         ).timestamp
         tout.append(t)
     return jsonWrapper(tout, isCursor=0), 200
