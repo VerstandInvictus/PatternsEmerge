@@ -2,52 +2,47 @@ var $overlay = $('<div class=overlay></div>')
 var $listContainer = $('<div class=centeredList></div>')
 
 
-function chartgenrfc (dataobj, bind) {
+function chartgen (dataobj, bind) {
     c3.generate({
         bindto: bind,
         data: {
-            rows: dataobj.rows,
+            json: dataobj,
             type: 'bar',
-            groups: [dataobj.groups],
-            order: null,
-            labels: true,
-            onmouseover: function () {
-                $(".c3-bar").css("fill-opacity", 0.5);
-                $(".c3-bar._expanded_").css("fill-opacity", 1);
+            xFormat: "%mm %m",
+            keys: {
+                x: 'date',
+                value: ['total'],
             },
-            onmouseout: function () {
-                $('.c3-bar').css("fill-opacity", 1);
-            },
-        },
-        color: {
-            pattern: colors
-        },
-        axis: {
-            rotated: false,
-            x: {
-                type: 'category',
-                categories: dataobj.categories
-            },
-            y: {
-                show: false
+            color: function (color, d) {
+                if(d.value > 50) {
+                    return "#ff0000";
+                } else {
+                return "#00ff00";
+                }
             }
         },
         legend: {
             position: 'bottom',
             item: {
                 onmouseover: function (d) {
-                        var d2 = d.replace(/ /g, '-')
-                        var whatlabel = ".c3-texts-" + d2 + ' text';
-                        $(whatlabel).css("display", "inline")
+                    var d2 = d.replace(/ /g, '-')
+                    var whatlabel = ".c3-texts-" + d2 + ' text';
+                    $(whatlabel).css("display", "inline")
                 },
                 onmouseout: function (d) {
-                        var d2 = d.replace(/ /g, '-')
-                        var whatlabel = ".c3-texts-" + d2 + ' text';
-                        $(whatlabel).css("display", "none")
+                    var d2 = d.replace(/ /g, '-')
+                    var whatlabel = ".c3-texts-" + d2 + ' text';
+                    $(whatlabel).css("display", "none")
                 }
+            }
+        },
+        axis: {
+            x: {
+                type: 'timeseries'
             }
         }
     })
+    console.log('generated')
 };
 
 $.ajaxSetup({
@@ -57,9 +52,8 @@ $.ajaxSetup({
     dataType: "json"
 });
 
-$.getJSON(apiRoot + 'reports/oapl', function
-(data) {
-    $('#sfcload').hide();
+$.getJSON(apiRoot + 'list/open12-6', function (data) {
+    $('#oaplload').hide();
     oapldata = data
-    oaplchart = chartgen(oapldata, "oapl", "#oaplchart")
+    oaplchart = chartgen(oapldata, "#oaplchart")
 });
