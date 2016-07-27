@@ -191,6 +191,7 @@ def listOapl(strategy):
             )
     maxt = pipsToDollars(strategy, max([d['total'] for d in retlist]))
     mint = pipsToDollars(strategy, min([d['total'] for d in retlist]))
+    raise KeyboardInterrupt
     for day in retlist:
         day['min'] = mint
         day['max'] = maxt
