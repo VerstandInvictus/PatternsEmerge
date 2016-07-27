@@ -1,14 +1,13 @@
 import cgitb
-import pprint
 from bs4 import BeautifulSoup
 import operator
-from itertools import izip
 import pymongo
 from flask import Flask, json, Response, request
 from flask_cors import CORS
 import os
 import arrow
 import mdcore
+import gradients
 from copy import deepcopy
 import config
 
@@ -145,15 +144,18 @@ def updateTrades(strategy):
 @app.route('/list/<strategy>')
 def listTrades(strategy):
     tout = list()
-    trades = tradeDb[strategy].find(
+    trades = list(tradeDb[strategy].find(
         filter={}
-    )
+    ))
+    maxt = max([t['total'] for t in trades])
+    mint = min([t['total'] for t in trades])
     for t in trades:
         t['total'] *= config.mdMultipliers[strategy]
         t['datetime'] = arrow.get(
             t['date'] + ' 2016 ' + t['entryTime'],
             'MMM D YYYY H:mm'
         ).timestamp
+        t['color'] = gradients.findColor(mint, maxt, t['total'])
         tout.append(t)
     return jsonWrapper(tout, isCursor=0), 200
 
@@ -167,9 +169,11 @@ def listOapl(strategy):
             "total": 325,
         }
     )
-    trades = tradeDb[strategy].find(
+    trades = list(tradeDb[strategy].find(
         filter={}
-    )
+    ))
+    maxt = max([t['total'] for t in trades])
+    mint = min([t['total'] for t in trades])
     for t in trades:
         found = 0
         t['total'] *= config.mdMultipliers[strategy]
@@ -182,7 +186,8 @@ def listOapl(strategy):
             retlist.append(
                 {
                     "date": t['date'],
-                    "total": t['total'] + retlist[-1]['total']
+                    "total": t['total'] + retlist[-1]['total'],
+                    "color": gradients.findColor(mint, maxt, t['total'])
                 }
             )
     return jsonWrapper(retlist, isCursor=0), 200
