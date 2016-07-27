@@ -172,8 +172,9 @@ def listOapl(strategy):
         }
     )
     trades = list(tradeDb[strategy].find(
-        filter={},
-        sort={'datetime'}
+        filter={}
+    ).sort(
+        [("datetime", 1)]
     ))
     for t in trades:
         found = 0
