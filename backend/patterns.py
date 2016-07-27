@@ -221,6 +221,7 @@ def genTotals(strategy):
     totals['avgloss'] = sum(loses) / len(loses)
     totals['winrate'] = len(wins) / len(trades)
     totals['roi'] = sum(wins) - sum(loses)
+    raise IndexError
     totals['rredge'] = totals['avgwin'] + totals['avgloss']
     totals['expect'] = int(totals['winrate'] * totals['avgwin'] +
                            ((1 - totals['winrate']) * totals['avgloss']))
