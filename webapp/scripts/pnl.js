@@ -8,7 +8,7 @@ function chartgen (dataobj, bind) {
         data: {
             json: dataobj,
             type: 'bar',
-            xFormat: "%mm %m",
+            xFormat: null,
             keys: {
                 x: 'date',
                 value: ['total'],
@@ -38,7 +38,7 @@ function chartgen (dataobj, bind) {
         },
         axis: {
             x: {
-                type: 'timeseries'
+                type: 'category'
             }
         }
     })

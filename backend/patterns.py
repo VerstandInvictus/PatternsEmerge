@@ -157,5 +157,36 @@ def listTrades(strategy):
         tout.append(t)
     return jsonWrapper(tout, isCursor=0), 200
 
+
+@app.route('/oapl/<strategy>')
+def listOapl(strategy):
+    retlist = list()
+    retlist.append(
+        {
+            "Date": "Jul 25",
+            "Total": 0,
+        }
+    )
+    trades = tradeDb[strategy].find(
+        filter={}
+    )
+    for t in trades:
+        found = 0
+        t['total'] *= config.mdMultipliers[strategy]
+        for i, day in enumerate(retlist):
+            if day['Date'] == t['date']:
+                retlist[i]['Total'] += t['total']
+                found = 1
+                break
+        if found == 0:
+            retlist.append(
+                {
+                    "Date": t['date'],
+                    "Total": t['total']
+                }
+            )
+    return jsonWrapper(retlist, isCursor=0), 200
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
