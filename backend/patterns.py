@@ -147,8 +147,8 @@ def listTrades(strategy):
     trades = list(tradeDb[strategy].find(
         filter={}
     ))
-    maxt = max([t['total'] for t in trades])
-    mint = min([t['total'] for t in trades])
+    maxt = max([t['total'] for t in trades]) * config.mdMultipliers[strategy]
+    mint = min([t['total'] for t in trades]) * config.mdMultipliers[strategy]
     for t in trades:
         t['total'] *= config.mdMultipliers[strategy]
         t['datetime'] = arrow.get(
@@ -172,8 +172,8 @@ def listOapl(strategy):
     trades = list(tradeDb[strategy].find(
         filter={}
     ))
-    maxt = max([t['total'] for t in trades])
-    mint = min([t['total'] for t in trades])
+    maxt = max([t['total'] for t in trades]) * config.mdMultipliers[strategy]
+    mint = min([t['total'] for t in trades]) * config.mdMultipliers[strategy]
     for t in trades:
         found = 0
         t['total'] *= config.mdMultipliers[strategy]
