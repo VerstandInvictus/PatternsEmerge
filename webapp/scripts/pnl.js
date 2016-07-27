@@ -7,18 +7,14 @@ function chartgen (dataobj, bind, type) {
         bindto: bind,
         data: {
             json: dataobj,
-            type: type,
+            type: 'bar',
             xFormat: null,
             keys: {
                 x: 'date',
                 value: ['total'],
             },
             color: function (color, d) {
-                if(d.value > 0 ) {
-                    return "#009933";
-                } else {
-                    return "#990000";
-                }
+                return d.id ? dataobj[d.index]['color'] : color;
             }
         },
         legend: {
@@ -40,6 +36,9 @@ function chartgen (dataobj, bind, type) {
             x: {
                 type: 'category'
             }
+        },
+        legend: {
+            show: false
         }
     })
     console.log('generated')
