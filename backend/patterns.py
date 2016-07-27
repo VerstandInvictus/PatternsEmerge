@@ -159,7 +159,8 @@ def listTrades(strategy):
         ).timestamp
         t['color'] = gradients.findColor(mint, maxt, t['total'])
         tout.append(t)
-    return jsonWrapper(tout, isCursor=0), 200
+    return jsonWrapper(sorted(tout, key=lambda x: x['datetime']),
+                       isCursor=0), 200
 
 
 @app.route('/oapl/<strategy>')
@@ -167,13 +168,19 @@ def listOapl(strategy):
     retlist = list()
     retlist.append(
         {
-            "date": "Jul 11",
-            "total": 0,
+            "date": "Jul 25",
+            "total": 325,
         }
     )
     trades = list(tradeDb[strategy].find(
         filter={}
     ))
+    for t in trades:
+        t['datetime'] = arrow.get(
+            t['date'] + ' 2016 ' + t['entryTime'],
+            'MMM D YYYY H:mm'
+        ).timestamp
+    trades = sorted(trades, key=lambda x: x['datetime'])
     for t in trades:
         found = 0
         t['total'] = pipsToDollars(strategy, t['total'])
@@ -193,8 +200,7 @@ def listOapl(strategy):
     mint = min([d['total'] for d in retlist])
     for day in retlist:
         day['color'] = gradients.findColor(mint, maxt, day['total'])
-    return jsonWrapper(sorted(retlist, key=lambda x: x['datetime']),
-                              isCursor=0), 200
+    return jsonWrapper(retlist, isCursor=0), 200
 
 
 if __name__ == '__main__':
