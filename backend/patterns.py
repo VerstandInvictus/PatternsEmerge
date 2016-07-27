@@ -220,7 +220,7 @@ def genTotals(strategy):
     totals['avgwin'] = sum(wins) / len(wins)
     totals['avgloss'] = sum(loses) / len(loses)
     totals['winrate'] = len(wins) / len(trades)
-    totals['roi'] = 2500 + sum(wins) - sum(loses)
+    totals['roi'] = sum(wins) - sum(loses)
     totals['rredge'] = totals['avgwin'] + totals['avgloss']
     totals['expect'] = int(totals['winrate'] * totals['avgwin'] +
                            ((1 - totals['winrate']) * totals['avgloss']))
