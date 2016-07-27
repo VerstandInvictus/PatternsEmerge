@@ -211,8 +211,8 @@ def genTotals(strategy):
     ))
     for t in trades:
         t['total'] = pipsToDollars(strategy, t['total'])
-    wins = [x for x in trades if x['total'] > 0]
-    loses = [x for x in trades if x['total'] <= 0]
+    wins = [x['total'] for x in trades if x['total'] > 0]
+    loses = [x['total'] for x in trades if x['total'] <= 0]
     totals['won'] = len(wins)
     totals['lost'] = len(loses)
     totals['best'] = max([x['total'] for x in trades])
