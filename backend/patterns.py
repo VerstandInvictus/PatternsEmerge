@@ -225,6 +225,7 @@ def genTotals(strategy):
     totals['expect'] = totals['winrate'] * totals['avgwin'] + \
                        ((1-totals['winrate']) * totals['avgloss'])
     totals['monthly'] = totals['expect'] * 5 * 4
+    return jsonWrapper(totals, isCursor=0), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
