@@ -174,8 +174,6 @@ def listOapl(strategy):
     trades = list(tradeDb[strategy].find(
         filter={}
     ))
-    maxt = pipsToDollars(strategy, max([t['total'] for t in trades]))
-    mint = pipsToDollars(strategy, min([t['total'] for t in trades]))
     for t in trades:
         found = 0
         t['total'] = pipsToDollars(strategy, t['total'])
@@ -189,9 +187,12 @@ def listOapl(strategy):
                 {
                     "date": t['date'],
                     "total": t['total'] + retlist[-1]['total'],
-                    "color": gradients.findColor(mint, maxt, t['total'])
                 }
             )
+    maxt = pipsToDollars(strategy, max([d['total'] for d in retlist]))
+    mint = pipsToDollars(strategy, min([d['total'] for d in retlist]))
+    for day in retlist:
+        day['color'] = gradients.findColor(mint, maxt, day['total'])
     return jsonWrapper(retlist, isCursor=0), 200
 
 
