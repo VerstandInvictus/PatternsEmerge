@@ -1,3 +1,4 @@
+from __future__ import division
 import cgitb
 from bs4 import BeautifulSoup
 import operator
