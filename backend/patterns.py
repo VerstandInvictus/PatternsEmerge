@@ -191,7 +191,6 @@ def listOapl(strategy):
             )
     maxt = max([d['total'] for d in retlist])
     mint = min([d['total'] for d in retlist])
-    raise IndexError
     for day in retlist:
         day['color'] = gradients.findColor(mint, maxt, day['total'])
     return jsonWrapper(retlist, isCursor=0), 200
