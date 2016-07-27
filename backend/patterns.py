@@ -19,7 +19,6 @@ timeformat = "YYYY-MM-DD HH:mm:ss ZZ"
 client = pymongo.MongoClient()
 tradeDb = client.patternsemerge
 
-
 app = Flask(__name__)
 # development CORS convenience headers
 CORS(app, headers=['Content-Type'], supports_credentials=True)
@@ -223,10 +222,12 @@ def genTotals(strategy):
     totals['winrate'] = len(wins) / len(trades)
     totals['roi'] = 2500 + sum(wins) - sum(loses)
     totals['rredge'] = totals['avgwin'] + totals['avgloss']
-    totals['expect'] = totals['winrate'] * totals['avgwin'] + \
-                       ((1-totals['winrate']) * totals['avgloss'])
-    totals['monthly'] = totals['expect'] * 5 * 4
+    totals['expect'] = int(totals['winrate'] * totals['avgwin'] +
+                           ((1 - totals['winrate']) * totals['avgloss']))
+    totals['monthly'] = int(totals['expect'] * 5 * 4)
+    totals['winrate'] *= 100
     return jsonWrapper(totals, isCursor=0), 200
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
