@@ -15,7 +15,12 @@ def findColor(low, high, val):
     spread = high - low
     ratio = (val - low) / spread
     index = int(ratio * len(gradient))
-    return gradient[index-1]
+    try:
+        return gradient[index]
+    except IndexError:
+        return gradient[-1]
 
 if __name__ == "__main__":
-    print findColor(-257.5, -5, -50)
+    print findColor(257.5, 495, 325)
+    print findColor(257.5, 495, 495)
+    print findColor(257.5, 495, 257.5)
