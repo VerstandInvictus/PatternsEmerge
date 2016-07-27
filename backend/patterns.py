@@ -33,6 +33,8 @@ mdlog = os.path.join(logdir, "mdcore.log")
 
 print logdir
 
+def pipsToDollars(strategy, pips):
+    return (pips - config.mdFees[strategy]) * config.mdMultipliers[strategy]
 
 def logWrite(item):
     datestr = arrow.utcnow().to("US/Pacific").format(timeformat) + ": "
@@ -147,8 +149,8 @@ def listTrades(strategy):
     trades = list(tradeDb[strategy].find(
         filter={}
     ))
-    maxt = max([t['total'] for t in trades]) * config.mdMultipliers[strategy]
-    mint = min([t['total'] for t in trades]) * config.mdMultipliers[strategy]
+    maxt = pipsToDollars(strategy, max([t['total'] for t in trades]))
+    mint = pipsToDollars(strategy, min([t['total'] for t in trades]))
     for t in trades:
         t['total'] *= config.mdMultipliers[strategy]
         t['datetime'] = arrow.get(
@@ -172,11 +174,11 @@ def listOapl(strategy):
     trades = list(tradeDb[strategy].find(
         filter={}
     ))
-    maxt = max([t['total'] for t in trades]) * config.mdMultipliers[strategy]
-    mint = min([t['total'] for t in trades]) * config.mdMultipliers[strategy]
+    maxt = pipsToDollars(strategy, max([t['total'] for t in trades]))
+    mint = pipsToDollars(strategy, min([t['total'] for t in trades]))
     for t in trades:
         found = 0
-        t['total'] *= config.mdMultipliers[strategy]
+        t['total'] = pipsToDollars(strategy, t['total'])
         for i, day in enumerate(retlist):
             if day['date'] == t['date']:
                 retlist[i]['total'] += t['total']
