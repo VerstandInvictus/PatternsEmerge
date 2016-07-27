@@ -18,4 +18,4 @@ def findColor(low, high, val):
     return gradient[index-1]
 
 if __name__ == "__main__":
-    print findColor(-75, 350, 40)
+    print findColor(257.5, 495, 325)
