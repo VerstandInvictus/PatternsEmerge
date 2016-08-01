@@ -225,9 +225,9 @@ def genTotals(strategy):
     totals['avgloss'] = [int(avgloss), gradients.findColor(worst, best, avgloss)]
     winrate = len(wins) / len(trades)
     totals['winrate'] = [int(winrate * 100), gradients.findColor(0, 1, winrate)]
-    roi = ((sum(wins) + sum(loses)) / 2500) * 100
-    totals['roi'] = [roi, gradients.findColor(0, 1, roi)]
-    rredge = avgwin + avgloss
+    roi = int(((sum(wins) + sum(loses)) / 2500) * 100)
+    totals['roi'] = [roi, gradients.findColor(0, 100, roi)]
+    rredge = int(avgwin + avgloss)
     totals['rredge'] = [rredge, gradients.findColor(worst, best, rredge)]
     expect = int(winrate * avgwin + ((1 - winrate) * avgloss))
     totals['expect'] = [expect, gradients.findColor(worst, best, expect)]
