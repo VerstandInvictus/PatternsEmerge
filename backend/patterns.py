@@ -213,18 +213,18 @@ def genTotals(strategy):
         t['total'] = pipsToDollars(strategy, t['total'])
     wins = [x['total'] for x in trades if x['total'] > 0]
     loses = [x['total'] for x in trades if x['total'] <= 0]
-    totals['won'] = len(wins)
-    totals['lost'] = len(loses)
+    totals['won'] = [len(wins), "none"]
+    totals['lost'] = [len(loses), "none"]
     best = max([x['total'] for x in trades])
     totals['best'] = [best, gradients.findColor(-150, 300, best)]
     worst = min([x['total'] for x in trades])
     totals['worst'] = [worst, gradients.findColor(-150, 300, worst)]
     avgwin = sum(wins) / len(wins)
-    totals['avgwin'] = [avgwin, gradients.findColor(worst, best, avgwin)]
+    totals['avgwin'] = [int(avgwin), gradients.findColor(worst, best, avgwin)]
     avgloss = sum(loses) / len(loses)
-    totals['avgloss'] = [avgloss, gradients.findColor(worst, best, avgloss)]
+    totals['avgloss'] = [int(avgloss), gradients.findColor(worst, best, avgloss)]
     winrate = len(wins) / len(trades)
-    totals['winrate'] = [winrate * 100, gradients.findColor(0, 1, winrate)]
+    totals['winrate'] = [int(winrate * 100), gradients.findColor(0, 1, winrate)]
     roi = ((sum(wins) + sum(loses)) / 2500) * 100
     totals['roi'] = [roi, gradients.findColor(0, 1, roi)]
     rredge = avgwin + avgloss

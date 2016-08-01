@@ -65,3 +65,11 @@ $.getJSON(apiRoot + 'list/open12-6', function (data) {
     tradesdata = data
     tradeschart = chartgen(tradesdata, "#tradeschart", 150)
 });
+
+$.getJSON(apiRoot + 'totals/open12-6', function (data) {
+    var format = d3.format('$,');
+    $.each(data, function(i) {
+        $("#" + i).text(data[i][0]);
+        $("#" + i).css({backgroundColor:data[i][1]})
+    })
+});
