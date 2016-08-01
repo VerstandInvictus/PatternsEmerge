@@ -215,17 +215,24 @@ def genTotals(strategy):
     loses = [x['total'] for x in trades if x['total'] <= 0]
     totals['won'] = len(wins)
     totals['lost'] = len(loses)
-    totals['best'] = max([x['total'] for x in trades])
-    totals['worst'] = min([x['total'] for x in trades])
-    totals['avgwin'] = sum(wins) / len(wins)
-    totals['avgloss'] = sum(loses) / len(loses)
-    totals['winrate'] = len(wins) / len(trades)
-    totals['roi'] = ((sum(wins) + sum(loses)) / 2500) * 100
-    totals['rredge'] = totals['avgwin'] + totals['avgloss']
-    totals['expect'] = int(totals['winrate'] * totals['avgwin'] +
-                           ((1 - totals['winrate']) * totals['avgloss']))
-    totals['monthly'] = int(totals['expect'] * 5 * 4)
-    totals['winrate'] *= 100
+    best = max([x['total'] for x in trades])
+    totals['best'] = [best, gradients.findColor(-100, 200, best)]
+    worst = min([x['total'] for x in trades])
+    totals['worst'] = [worst, gradients.findColor(-100, 200, worst)]
+    avgwin = sum(wins) / len(wins)
+    totals['avgwin'] = [avgwin, gradients.findColor(worst, best, avgwin)]
+    avgloss = sum(loses) / len(loses)
+    totals['avgloss'] = [avgloss, gradients.findColor(worst, best, avgloss)]
+    winrate = len(wins) / len(trades)
+    totals['winrate'] = [winrate * 100, gradients.findColor(0, 1, winrate)]
+    roi = ((sum(wins) + sum(loses)) / 2500) * 100
+    totals['roi'] = [roi * 100, gradients.findColor(0, 1, roi)]
+    rredge = avgwin + avgloss
+    totals['rredge'] = [rredge, gradients.findColor(worst, best, rredge)]
+    expect = int(winrate * avgwin + ((1 - winrate) * avgloss))
+    totals['expect'] = [expect, gradients.findColor(worst, best, expect)]
+    monthly = int(expect * 5 * 4)
+    totals['monthly'] = [monthly, gradients.findColor(-500, 1000, monthly)]
     return jsonWrapper(totals, isCursor=0), 200
 
 
