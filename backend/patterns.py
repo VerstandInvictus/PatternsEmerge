@@ -217,9 +217,8 @@ def genTotals(strategy):
     loses = [x['total'] for x in losetrades]
     shorts = [x for x in trades if x['direction'] == "Short"]
     longs = [x for x in trades if x['direction'] == "Long"]
-    shortwins = [x for x in shorts if x in wins]
-    longwins = [x for x in longs if x in wins]
-    raise IndexError
+    shortwins = [x for x in shorts if x in wintrades]
+    longwins = [x for x in longs if x in wintrades]
     totals['won'] = [len(wins), "none"]
     totals['lost'] = [len(loses), "none"]
     best = max([x['total'] for x in trades])
