@@ -247,7 +247,7 @@ def genTotals(strategy):
     totals['expect'] = [expect, gradients.findColor(worst, best, expect)]
     monthly = int(expect * 5 * 4)
     totals['monthly'] = [monthly, gradients.findColor(-500, 1000, monthly)]
-    balance = [int(2500 + sum(wins) + sum(loses))]
+    balance = int(2500 + sum(wins) + sum(loses))
     totals['balance'] = [balance, gradients.findColor(0, 5000, balance)]
     return jsonWrapper(totals, isCursor=0), 200
 
