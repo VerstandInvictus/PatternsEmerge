@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
     <title>Patterns Emerge</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/css/sortable-theme-light.min.css">
@@ -35,25 +36,50 @@
     <div class="barChart" id="tradeschart"></div>
 </div>
 <div class="container">
+    <div class="chartHeader" id="totalsboxheader">
+        <h3><b>Trading KPIs To Date</b></h3>
+        <p class="instructions">Totals, averages, and metrics.</p>
+    </div>
     <div class="barChart" id="totalsbox">
-        <span class="splitblock">
-        <p>Won: $<span id="won"></span></p>
-        <p>Average Win: $<span id="avgwin"></span></p>
-        <p>Best: $<span id="best"></span></p>
+        <span class="splitblock label">
+            <p>Average:</p>
+            <p>Best:</p>
+            <p>Long WR:</p>
         </span>
-        <span class="splitblock">
-        <p>Lost: <span id="lost"></span></p>
-        <p>Average Loss: $<span id="avgloss"></span></p>
-        <p>Worst: $<span id="worst"></span></p>
+        <span class="splitblock data">
+            <p>$<span id="avgwin"></span></p>
+            <p>$<span id="best"></span></p>
+            <p><span id="longwr"></span>%</p>
         </span>
-        <span class="splitblock">
-        <p>Win Rate: <span><span id="winrate"></span>%</span></p>
-        <p>Return on Investment: <span id="roi"></span>%</p>
+        <span class="splitblock label">
+            <p>Average:</p>
+            <p>Worst:</p>
+            <p>Short WR:</p>
         </span>
-        <span class="splitblock">
-        <p>Per Trade Edge: $<span id="rredge"></span></p>
-        <p>Expectation: $<span id="expect"></span></p>
-        <p>Monthly: $<span id="monthly"></span></p>
+        <span class="splitblock data">
+            <p>$<span id="avgloss"></span></p>
+            <p>$<span id="worst"></span></p>
+            <p><span id="shortwr"></span>%</p>
+        </span>
+        <span class="splitblock label">
+            <p>Balance:</p>
+            <p>ROI Now:</p>
+            <p>Win Rate:</p>
+        </span>
+        <span class="splitblock data">
+            <p>$<span id="balance"></span></p>
+            <p><span id="roi"></span>%</p>
+            <p><span id="winrate"></span>%</p>
+        </span>
+        <span class="splitblock label">
+            <p>P/T Edge:</p>
+            <p>Expectation:</p>
+            <p>Monthly:</p>
+        </span>
+        <span class="splitblock data">
+            <p>$<span id="rredge"></span></p>
+            <p>$<span id="expect"></span></p>
+            <p>$<span id="monthly"></span></p>
         </span>
     </div>
 </div>

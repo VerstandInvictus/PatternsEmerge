@@ -29,5 +29,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
 }
 
 .splitblock p {
-    margin: 0;
+    margin: 3px;
+}
+
+.label {
+    width: 12%
+}
+
+.label p {
+    text-align: right;
+}
+
+.data {
+    width: 12%;
+}
+
+.data p {
+    text-align: center;
+}
+
+#totalsbox {
+    height: 65px;
 }
