@@ -18,24 +18,10 @@ function chartgen (dataobj, bind, height) {
                 return d.id ? dataobj[d.index]['color'] : color;
             }
         },
-        legend: {
-            position: 'bottom',
-            item: {
-                onmouseover: function (d) {
-                    var d2 = d.replace(/ /g, '-')
-                    var whatlabel = ".c3-texts-" + d2 + ' text';
-                    $(whatlabel).css("display", "inline")
-                },
-                onmouseout: function (d) {
-                    var d2 = d.replace(/ /g, '-')
-                    var whatlabel = ".c3-texts-" + d2 + ' text';
-                    $(whatlabel).css("display", "none")
-                }
-            }
-        },
         axis: {
             x: {
-                type: 'category'
+                type: 'category',
+                show: false
             }
         },
         legend: {
@@ -67,7 +53,7 @@ $("#updated").click(function() {
 $.getJSON(apiRoot + 'oapl/open12-6', function (data) {
     $('#oaplload').hide();
     oapldata = data
-    oaplchart = chartgen(oapldata, "#oaplchart", 300)
+    oaplchart = chartgen(oapldata, "#oaplchart", 200)
 });
 
 $.getJSON(apiRoot + 'list/open12-6', function (data) {

@@ -8,7 +8,7 @@
 //theme: https://coolors.co/383f51-49111c-e2d4b7-5c0029-b5bec6
 
 var colors = ['#104060','#125b94','#1f7fc1','#67add8']
-var apiRoot = "http://stlvg.duckdns.org:5001/"
+var apiRoot = "http://kwisatz.hadera.ch:5001/"
 
 // Use the browser's built-in functionality to quickly and safely escape the string
 function escapeHtml(str) {
