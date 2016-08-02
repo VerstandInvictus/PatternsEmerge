@@ -23,6 +23,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
 
 .splitblock {
     margin: 0;
+    margin-bottom: 2px;
     display: inline-block;
     font-weight: bolder;
     text-align: center;
@@ -48,6 +49,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
     text-align: center;
 }
 
-#totalsbox {
-    height: 65px;
+.maininstrux {
+    margin 2% 0 0 0;
 }
