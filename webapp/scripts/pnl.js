@@ -1,6 +1,7 @@
 var $overlay = $('<div class=overlay></div>')
 var $listContainer = $('<div class=centeredList></div>')
 
+$("#updatedwait").hide();
 
 function chartgen (dataobj, bind, height) {
     c3.generate({
@@ -52,6 +53,15 @@ $.ajaxSetup({
         withCredentials: true
     },
     dataType: "json"
+});
+
+$("#updated").click(function() {
+    $("#updated").hide();
+    $("#updatedwait").show();
+    $.getJSON(apiRoot + 'update/open12-6', function(data) {
+        console.log(data);
+        location.reload(true);
+    });
 });
 
 $.getJSON(apiRoot + 'oapl/open12-6', function (data) {

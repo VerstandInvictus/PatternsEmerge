@@ -50,5 +50,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
 }
 
 .maininstrux {
-    margin 2% 0 0 0;
+    margin-top: 2%;
+    margin-right: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+}
+
+.pct {
+    padding-left: 7%;
 }

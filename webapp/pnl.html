@@ -20,7 +20,8 @@
     <div class="headertext"><h1><b><i>Restate My Assumptions</i></b></h1></div>
 </div>
 <div class="maininstrux">
-    <p class="submit getteardown">Update Data</p>
+    <p class="submit getteardown" id="updated">Update Data</p>
+    <h2 class="loadingbar" id="updatedwait">Loading Live Data. Please Wait...</h2>
 </div>
 <div class="container" id="oaplbox">
     <div class="chartHeader" id="oaplheader">
@@ -45,24 +46,24 @@
     </div>
     <div class="barChart" id="totalsbox">
         <span class="splitblock label">
-            <p>Average:</p>
-            <p>Best:</p>
+            <p>Avg Win:</p>
+            <p>Best Win:</p>
             <p>Long WR:</p>
         </span>
         <span class="splitblock data">
             <p>$<span id="avgwin"></span></p>
             <p>$<span id="best"></span></p>
-            <p><span id="longwr"></span>%</p>
+            <p><span class="pct" id="longwr"></span>%</p>
         </span>
         <span class="splitblock label">
-            <p>Average:</p>
+            <p>Avg Loss:</p>
             <p>Worst:</p>
             <p>Short WR:</p>
         </span>
         <span class="splitblock data">
             <p>$<span id="avgloss"></span></p>
             <p>$<span id="worst"></span></p>
-            <p><span id="shortwr"></span>%</p>
+            <p><span class="pct" id="shortwr"></span>%</p>
         </span>
         <span class="splitblock label">
             <p>Balance:</p>
@@ -71,8 +72,8 @@
         </span>
         <span class="splitblock data">
             <p>$<span id="balance"></span></p>
-            <p><span id="roi"></span>%</p>
-            <p><span id="winrate"></span>%</p>
+            <p><span class="pct" id="roi"></span>%</p>
+            <p><span class="pct" id="winrate"></span>%</p>
         </span>
         <span class="splitblock label">
             <p>P/T Edge:</p>
