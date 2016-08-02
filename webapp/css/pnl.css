@@ -20,3 +20,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
 .c3-legend-background {
     opacity: 0;
 }
+
+.splitblock {
+    margin: 0;
+    display: inline-block;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.splitblock p {
+    margin: 0;
+}

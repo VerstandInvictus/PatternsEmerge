@@ -218,11 +218,11 @@ def genTotals(strategy):
     best = max([x['total'] for x in trades])
     totals['best'] = [best, gradients.findColor(-150, 300, best)]
     worst = min([x['total'] for x in trades])
-    totals['worst'] = [worst, gradients.findColor(-150, 300, worst)]
+    totals['worst'] = [abs(worst), gradients.findColor(-150, 300, worst)]
     avgwin = sum(wins) / len(wins)
     totals['avgwin'] = [int(avgwin), gradients.findColor(worst, best, avgwin)]
     avgloss = sum(loses) / len(loses)
-    totals['avgloss'] = [int(avgloss), gradients.findColor(worst, best, avgloss)]
+    totals['avgloss'] = [abs(int(avgloss)), gradients.findColor(worst, best, avgloss)]
     winrate = len(wins) / len(trades)
     totals['winrate'] = [int(winrate * 100), gradients.findColor(0, 1, winrate)]
     roi = int(((sum(wins) + sum(loses)) / 2500) * 100)

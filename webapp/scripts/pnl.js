@@ -70,6 +70,6 @@ $.getJSON(apiRoot + 'totals/open12-6', function (data) {
     var format = d3.format('$,');
     $.each(data, function(i) {
         $("#" + i).text(data[i][0]);
-        $("#" + i).css({backgroundColor:data[i][1]})
+        $("#" + i).parent().css({backgroundColor:data[i][1]})
     })
 });
