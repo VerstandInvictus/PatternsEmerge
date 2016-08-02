@@ -211,8 +211,14 @@ def genTotals(strategy):
     ))
     for t in trades:
         t['total'] = pipsToDollars(strategy, t['total'])
-    wins = [x['total'] for x in trades if x['total'] > 0]
-    loses = [x['total'] for x in trades if x['total'] <= 0]
+    wintrades = [x for x in trades if x['total'] > 0]
+    wins = [x['total'] for x in wintrades]
+    losetrades = [x for x in trades if x['total'] <= 0]
+    loses = [x['total'] for x in losetrades]
+    shorts = [x for x in trades if x['direction'] == "Short"]
+    longs = [x for x in trades if x['direction'] == "Long"]
+    shortwins = [x for x in shorts if x in wins]
+    longwins = [x for x in longs if x in wins]
     totals['won'] = [len(wins), "none"]
     totals['lost'] = [len(loses), "none"]
     best = max([x['total'] for x in trades])
@@ -222,9 +228,17 @@ def genTotals(strategy):
     avgwin = sum(wins) / len(wins)
     totals['avgwin'] = [int(avgwin), gradients.findColor(worst, best, avgwin)]
     avgloss = sum(loses) / len(loses)
-    totals['avgloss'] = [abs(int(avgloss)), gradients.findColor(worst, best, avgloss)]
+    totals['avgloss'] = [abs(int(avgloss)), gradients.findColor(
+        worst, best, avgloss)]
+    shortwr = len(shortwins) / len(shorts)
+    totals['shortwr'] = [int(shortwr * 100), gradients.findColor(
+        0, 1, shortwr)]
+    longwr = len(longwins) / len(longs)
+    totals['longwr'] = [int(longwr * 100), gradients.findColor(
+        0, 1, longwr)]
     winrate = len(wins) / len(trades)
-    totals['winrate'] = [int(winrate * 100), gradients.findColor(0, 1, winrate)]
+    totals['winrate'] = [int(winrate * 100), gradients.findColor(
+        0, 1, winrate)]
     roi = int(((sum(wins) + sum(loses)) / 2500) * 100)
     totals['roi'] = [roi, gradients.findColor(0, 100, roi)]
     rredge = int(avgwin + avgloss)
@@ -233,6 +247,8 @@ def genTotals(strategy):
     totals['expect'] = [expect, gradients.findColor(worst, best, expect)]
     monthly = int(expect * 5 * 4)
     totals['monthly'] = [monthly, gradients.findColor(-500, 1000, monthly)]
+    balance = [int(2500 + sum(wins) + sum(loses))]
+    totals['balance'] = [balance, gradients.findColor(0, 5000, balance)]
     return jsonWrapper(totals, isCursor=0), 200
 
 
