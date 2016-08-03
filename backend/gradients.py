@@ -1,9 +1,9 @@
 from __future__ import division
 from colour import Color
 
-red = Color(rgb=(230/255, 124/255, 115/255))
-yellow = Color(rgb=(1, 214/255, 102/255))
-green = Color(rgb=(87/255, 187/255, 138/255))
+red = Color(rgb=(86/255, 77/255, 143/255))
+yellow = Color(rgb=(170/255, 83/255, 151/255))
+green = Color(rgb=(233/255, 145/255, 45/255))
 
 ry = red.range_to(yellow, 12)
 yg = yellow.range_to(green, 12)

@@ -78,12 +78,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
     text-align: center;
 }
 
-#totalsbox p.mid {
-    border-top: none;
-    border-bottom: none;
-}
-
 #totalsbox span.mid p {
-    border-left: none;
-    border-right: none;
+    margin-left: 0;
+    margin-right: 0;
 }
