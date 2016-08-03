@@ -45,45 +45,20 @@
         <p class="instructions">Totals, averages, and metrics.</p>
     </div>
     <div class="barChart" id="totalsbox">
-        <span class="splitblock label">
-            <p>Avg Win:</p>
-            <p>Best Win:</p>
-            <p>Long WR:</p>
-        </span>
         <span class="splitblock data">
-            <p>$<span id="avgwin"></span></p>
-            <p>$<span id="best"></span></p>
-            <p><span class="pct" id="longwr"></span>%</p>
-        </span>
-        <span class="splitblock label">
-            <p>Avg Loss:</p>
-            <p>Worst:</p>
-            <p>Short WR:</p>
-        </span>
-        <span class="splitblock data">
-            <p>$<span id="avgloss"></span></p>
-            <p>$<span id="worst"></span></p>
-            <p><span class="pct" id="shortwr"></span>%</p>
-        </span>
-        <span class="splitblock label">
-            <p>Balance:</p>
-            <p>ROI Now:</p>
-            <p>Win Rate:</p>
-        </span>
-        <span class="splitblock data">
-            <p>$<span id="balance"></span></p>
-            <p><span class="pct" id="roi"></span>%</p>
-            <p><span class="pct" id="winrate"></span>%</p>
-        </span>
-        <span class="splitblock label">
-            <p>P/T Edge:</p>
-            <p>Expectation:</p>
-            <p>Monthly:</p>
-        </span>
-        <span class="splitblock data">
-            <p>$<span id="rredge"></span></p>
-            <p>$<span id="expect"></span></p>
-            <p>$<span id="monthly"></span></p>
+            <p><span class="left">Balance:</span><span class="right dol" id="balance"></span></p>
+            <p class="mid"><span class="left">Avg Win:</span><span class="right dol" id="avgwin"></span></p>
+            <p><span class="left">Avg Loss:</span><span class="right dol" id="avgloss"></span></p>
+        </span><!--
+        --><span class="splitblock data mid">
+            <p><span class="left">Long WR:</span><span class="right pct" id="longwr"></span></p>
+            <p class="mid"><span class="left">Short WR:</span><span class="right pct" id="shortwr"></span></p>
+            <p><span class="left">Win Rate:</span><span class="right pct" id="winrate"></span></p>
+        </span><!--
+        --><span class="splitblock data">
+            <p><span class="left">ROI Now:</span><span class="right pct" id="roi"></span></p>
+            <p class="mid"><span class="left">Expect:</span><span class="right dol" id="expect"></span></p>
+            <p><span class="left">Monthly:</span><span class="right dol" id="monthly"></span></p>
         </span>
     </div>
 </div>

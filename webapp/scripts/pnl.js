@@ -68,4 +68,6 @@ $.getJSON(apiRoot + 'totals/open12-6', function (data) {
         $("#" + i).text(data[i][0]);
         $("#" + i).parent().css({backgroundColor:data[i][1]})
     })
+    $(".pct").append("%")
+    $(".dol").prepend("$")
 });
