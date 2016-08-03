@@ -243,7 +243,7 @@ def genTotals(strategy):
     totals['roi'] = [roi, gradients.findColor(0, 50, roi)]
     rredge = int(avgwin + avgloss)
     totals['rredge'] = [rredge, gradients.findColor(worst, best, rredge)]
-    expect = int(winrate * avgwin + ((1 - winrate) * 75))
+    expect = int(winrate * avgwin + ((1 - winrate) * -75))
     totals['expect'] = [expect, gradients.findColor(worst, best, expect)]
     monthly = int(expect * 5 * 4)
     totals['monthly'] = [monthly, gradients.findColor(-500, 1500, monthly)]
