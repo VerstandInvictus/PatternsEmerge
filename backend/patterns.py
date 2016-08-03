@@ -240,13 +240,13 @@ def genTotals(strategy):
     totals['winrate'] = [int(winrate * 100), gradients.findColor(
         0, 1, winrate)]
     roi = int(((sum(wins) + sum(loses)) / 2500) * 100)
-    totals['roi'] = [roi, gradients.findColor(0, 100, roi)]
+    totals['roi'] = [roi, gradients.findColor(0, 50, roi)]
     rredge = int(avgwin + avgloss)
     totals['rredge'] = [rredge, gradients.findColor(worst, best, rredge)]
-    expect = int(winrate * avgwin + ((1 - winrate) * avgloss))
+    expect = int(winrate * avgwin + ((1 - winrate) * 75))
     totals['expect'] = [expect, gradients.findColor(worst, best, expect)]
     monthly = int(expect * 5 * 4)
-    totals['monthly'] = [monthly, gradients.findColor(-500, 1000, monthly)]
+    totals['monthly'] = [monthly, gradients.findColor(-500, 1500, monthly)]
     balance = int(2500 + sum(wins) + sum(loses))
     totals['balance'] = [balance, gradients.findColor(0, 5000, balance)]
     return jsonWrapper(totals, isCursor=0), 200
