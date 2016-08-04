@@ -1,21 +1,26 @@
 from __future__ import division
-from colour import Color
 
-gradient = [
-    "#8701e8",
-    "#9805DC",
-    "#9e06d7",
-    "#a909cf",
-    "#c00ebf",
-    "#d813ad",
-    "#f81a96",
-    "#ff2f76",
-    "#ff346f",
-    "#ff4458",
-    "#ff5048",
-    "#ff5a39",
-    "#ff622e",
-    "#ff6c20",]
+gradient = ["#BD00B5",
+            "#B306B5",
+            "#A90CB5",
+            "#9F12B6",
+            "#9519B6",
+            "#8B1FB7",
+            "#8125B7",
+            "#772CB7",
+            "#6D32B8",
+            "#6338B8",
+            "#593FB9",
+            "#4F45B9",
+            "#454BBA",
+            "#3B52BA",
+            "#3158BA",
+            "#275EBB",
+            "#1D65BB",
+            "#136BBC",
+            "#0971BC",
+            "#0078BD",]
+
 
 def findColor(low, high, val):
     spread = high - low

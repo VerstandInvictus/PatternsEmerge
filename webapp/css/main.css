@@ -118,119 +118,6 @@ h3 {
 	padding: 5px;
 }
 
-.overlay {
-    background-color: rgba(0,0,0,0.8);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    text-align: center;
-    min-height: 100%;
-}
-
-.centeredList {
-    background-color: #104060;
-    margin: auto;
-    margin-top: 5%;
-    text-align: center;
-    border: 2px solid black;
-    display: inline-block;
-    max-height: 80%;
-}
-
-.centeredList table {
-    margin: 0;
-    padding: 0;
-    table-layout: fixed;
-    word-wrap: break-word;
-    overflow: hidden;
-    border-collapse: collapse;
-    padding: 0%;
-}
-
-.centeredList th {
-    align: center;
-    padding: 0px !important;
-    padding-left: 5px !important;
-    border: none !important;
-    font-size: 15px;
-}
-
-.centeredList caption {
-    padding: 5px;
-    color: white;
-    text-align: right;
-}
-
-.centeredList td {
-    overflow: hidden;
-    text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 0px 5px !important;
-}
-
-.centeredList thead {
-    display: block;
-    position: relative;
-    background-color: #E0E0E0;
-}
-
-.centeredList tbody {
-    display: block;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 600px;
-}
-
-.trdiv {
-    width: 100%;
-    max-width: 500px;
-}
-
-.tddate {
-    max-width: 100%;
-    overflow: hidden;
-    font-size: 12px;
-}
-
-.tdcase {
-    max-width: 100%;
-    overflow: hidden;
-    font-size: 14px;
-}
-
-.tdsubj {
-    max-width: 350px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 12px;
-}
-
-.tdcloser {
-    width: 100px;
-    overflow: ellipsis;
-    font-weight: bold;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 12px;
-}
-
-table.sortable-theme-light[data-sortable] th[data-sorted="true"] {
-    background: none repeat scroll 0% 0% #c0c0c0;
-}
-
-table.sortable-theme-light[data-sortable] th[data-sorted="false"] {
-    background: none repeat scroll 0% 0% #E0E0E0;
-}
-
-table.sortable-theme-light[data-sortable] {
-    color: #333;
-    background: none repeat scroll 0% 0% rgba(242,246,248,1);
-}
-
 .form {
     display: table;
     text-align: left;
@@ -362,11 +249,6 @@ sub {
     pointer: cursor;
 }
 
-#tddetails {
-    min-width: 700px;
-    max-width: 900px;
-}
-
 .instruxwrap {
     width: 500px;
     margin: 0 auto;
@@ -414,4 +296,8 @@ sub {
     margin: 0px;
     padding: 5px;
     text-align: right;
+}
+
+.tick text {
+    fill: white;
 }
