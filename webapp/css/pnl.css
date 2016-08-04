@@ -79,3 +79,13 @@
     margin-left: 0;
     margin-right: 0;
 }
+
+.themelink span {
+    cursor: pointer;
+    padding-left: .5%;
+    padding-right: .5%;
+}
+
+.sm {
+    font-size: 8px;
+}

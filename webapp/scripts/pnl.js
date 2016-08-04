@@ -14,7 +14,7 @@ var themes = {
         "header": "linear-gradient(to right, #8400ea 0%,#ce16c8 51%,#fc5c00 100%)",
         "headertext": "#ddd",
         "subheader": "#ddd",
-        "button": "#8d0e36"
+        "button": "#df2f7f"
       }
   },
   "deepblue": {
@@ -59,7 +59,6 @@ function updatePageColors (theme) {
 
 function updateChartColors (theme) {
     $(".barChart").css("background", theme.charts.background);
-    $(".tick text").css("fill", theme.charts.text);
     $(".left").css("color", theme.charts.lighttext);
     $(".right").css("color", theme.charts.text)
     $(document.head).append('<style>.c3-tooltip-container th{background: ' + theme.charts.tooltipheader +  ';}</style>')
@@ -111,26 +110,28 @@ $("#updated").click(function() {
     $("#updated").hide();
     $("#updatedwait").show();
     $.getJSON(apiRoot + 'update/open12-6', function(data) {
-        loadData(gradient);
+        loadData();
         $("#updated").show();
         $("#updatedwait").hide();
     });
 });
 
 function loadData () {
-    $.getJSON(apiRoot + 'oapl/open12-6/' + gradient, function (data) {
+    $.getJSON(apiRoot + 'oapl/open12-6/' + cgradient, function (data) {
         $('#oaplload').hide();
         oapldata = data
         oaplchart = chartgen(oapldata, "#oaplchart", 200)
+        $(".tick text").css("fill", themes[cgradient].charts.text);
     });
 
-    $.getJSON(apiRoot + 'list/open12-6/' + gradient, function (data) {
+    $.getJSON(apiRoot + 'list/open12-6/' + cgradient, function (data) {
         $('#tradesload').hide();
         tradesdata = data
         tradeschart = chartgen(tradesdata, "#tradeschart", 150)
+        $(".tick text").css("fill", themes[cgradient].charts.text);
     });
 
-    $.getJSON(apiRoot + 'totals/open12-6/' + gradient, function (data) {
+    $.getJSON(apiRoot + 'totals/open12-6/' + cgradient, function (data) {
         var format = d3.format('$,');
         $.each(data, function(i) {
             $("#" + i).text(data[i][0]);
@@ -141,6 +142,58 @@ function loadData () {
     });
 }
 
-gradient = 'hprographics'
-updatePageColors(themes[gradient]);
-updateChartColors(themes[gradient]);
+cgradient = 'hprographics'
+pgradient = 'hprographics'
+updatePageColors(themes[pgradient]);
+updateChartColors(themes[cgradient]);
+
+$("#sunburst").click(function(){
+    cgradient = 'sunburst';
+    pgradient = 'sunburst';
+    updatePageColors(themes[pgradient]);
+    updateChartColors(themes[cgradient]);
+});
+
+$("#sunburstp").click(function(){
+    pgradient = 'sunburst';
+    updatePageColors(themes[pgradient]);
+});
+
+$("#sunburstc").click(function(){
+    cgradient = 'sunburst';
+    updateChartColors(themes[cgradient]);
+});
+
+$("#deepblue").click(function(){
+    cgradient = 'deepblue';
+    pgradient = 'deepblue';
+    updatePageColors(themes[pgradient]);
+    updateChartColors(themes[cgradient]);
+});
+
+$("#deepbluep").click(function(){
+    pgradient = 'deepblue';
+    updatePageColors(themes[pgradient]);
+});
+
+$("#deepbluec").click(function(){
+    cgradient = 'deepblue';
+    updateChartColors(themes[cgradient]);
+});
+
+$("#hprographics").click(function(){
+    cgradient = 'hprographics';
+    pgradient = 'hprographics';
+    updatePageColors(themes[pgradient]);
+    updateChartColors(themes[cgradient]);
+});
+
+$("#hprographicsp").click(function(){
+    pgradient = 'hprographics';
+    updatePageColors(themes[pgradient]);
+});
+
+$("#hprographicsc").click(function(){
+    cgradient = 'hprographics';
+    updateChartColors(themes[cgradient]);
+});

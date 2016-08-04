@@ -17,8 +17,4 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
-$("#footer").click(function() {
-    window.location.assign("/webapp/")
-})
-
 $("#foottext").html("<i>All that is not saved will be lost.</i>")
