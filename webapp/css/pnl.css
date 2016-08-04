@@ -4,12 +4,7 @@
 }
 
 .barChart {
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f6f8+97,5c0029+97 */
-background: #f2f6f8; /* Old browsers */
-background: -moz-linear-gradient(top, #f2f6f8 97%, #5c0029 97%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, #f2f6f8 97%,#5c0029 97%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, #f2f6f8 97%,#5c0029 97%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#5c0029',GradientType=0 ); /* IE6-9 */
+    background: #383F51;
 }
 
 .c3-legend-item text {
@@ -31,6 +26,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
 
 .splitblock p {
     margin: 3px;
+    color: #dddddd;
 }
 
 .label {
@@ -72,6 +68,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', end
     font-weight: bold;
     min-width: 43%;
     max-width: 43%;
+    color: white;
 }
 
 #totalsbox {
