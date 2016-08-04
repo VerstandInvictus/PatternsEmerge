@@ -143,8 +143,8 @@ def updateTrades(strategy):
     return jsonWrapper(trades, isCursor=0), 200
 
 
-@app.route('/list/<strategy>')
-def listTrades(strategy):
+@app.route('/list/<strategy>/<theme>')
+def listTrades(strategy, theme):
     tout = list()
     trades = list(tradeDb[strategy].find(
         filter={}
@@ -157,14 +157,14 @@ def listTrades(strategy):
             t['date'] + ' 2016 ' + t['entryTime'],
             'MMM D YYYY H:mm'
         ).timestamp
-        t['color'] = gradients.findColor(mint, maxt, t['total'])
+        t['color'] = gradients.findColor(mint, maxt, t['total'], theme)
         tout.append(t)
     return jsonWrapper(sorted(tout, key=lambda x: x['datetime']),
                        isCursor=0), 200
 
 
-@app.route('/oapl/<strategy>')
-def listOapl(strategy):
+@app.route('/oapl/<strategy>/<theme>')
+def listOapl(strategy, theme):
     retlist = list()
     retlist.append(
         {
@@ -199,7 +199,7 @@ def listOapl(strategy):
     maxt = max([d['total'] for d in retlist])
     mint = min([d['total'] for d in retlist])
     for day in retlist:
-        day['color'] = gradients.findColor(mint, maxt, day['total'])
+        day['color'] = gradients.findColor(mint, maxt, day['total'], theme)
     return jsonWrapper(retlist, isCursor=0), 200
 
 

@@ -6,6 +6,7 @@ var themes = {
       "charts": {
         "background": "#11111b",
         "text": "white",
+        "lighttext": "#ddd",
         "tooltipheader": "linear-gradient(to right, #8400ea 0%,#ce16c8 51%,#fc5c00 100%)"
       },
       "page": {
@@ -20,6 +21,7 @@ var themes = {
       "charts": {
         "background": "#11111b",
         "text": "white",
+        "lighttext": "#ddd",
         "tooltipheader": "linear-gradient(to right, #8400ea 0%,#137cb5 53%,#17b8d8 100%)"
       },
       "page": {
@@ -34,6 +36,7 @@ var themes = {
       "charts": {
         "background": "#f2f6f8",
         "text": "black",
+        "lighttext": "black",
         "tooltipheader": "#5c0029"
       },
       "page": {
@@ -57,6 +60,8 @@ function updatePageColors (theme) {
 function updateChartColors (theme) {
     $(".barChart").css("background", theme.charts.background);
     $(".tick text").css("fill", theme.charts.text);
+    $(".left").css("color", theme.charts.lighttext);
+    $(".right").css("color", theme.charts.text)
     $(document.head).append('<style>.c3-tooltip-container th{background: ' + theme.charts.tooltipheader +  ';}</style>')
     loadData();
 }
@@ -136,6 +141,6 @@ function loadData () {
     });
 }
 
-gradient = 'hprographics']
+gradient = 'hprographics'
 updatePageColors(themes[gradient]);
 updateChartColors(themes[gradient]);
