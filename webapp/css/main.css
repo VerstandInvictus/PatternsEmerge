@@ -70,12 +70,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8400ea', end
 .chartHeader {
     color: white;
     text-align: right;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8400ea+0,137cb5+53,17b8d8+100 */
-background: #8400ea; /* Old browsers */
-background: -moz-linear-gradient(left, #8400ea 0%, #137cb5 53%, #17b8d8 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, #8400ea 0%,#137cb5 53%,#17b8d8 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, #8400ea 0%,#137cb5 53%,#17b8d8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8400ea', endColorstr='#17b8d8',GradientType=1 ); /* IE6-9 */
+    background: linear-gradient(to right, #8400ea 0%,#ce16c8 51%,#fc5c00 100%);
 }
 
 .container {
