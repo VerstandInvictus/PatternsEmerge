@@ -53,7 +53,7 @@ function updatePageColors (theme) {
     $("body").css("background", theme.page.background);
     $(".chartHeader").css("background", theme.page.header);
     $(".logoHeader").css("background", theme.page.header);
-    $("p .instructions").css("background", theme.page.subheader);
+    $(".chartHeader p").css("background-color", theme.page.subheader);
     $(".submit").css("background", theme.page.button);
 };
 
@@ -142,8 +142,8 @@ function loadData () {
     });
 }
 
-cgradient = 'hprographics'
-pgradient = 'hprographics'
+cgradient = 'deepblue'
+pgradient = 'sunburst'
 updatePageColors(themes[pgradient]);
 updateChartColors(themes[cgradient]);
 
