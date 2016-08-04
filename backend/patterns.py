@@ -203,8 +203,8 @@ def listOapl(strategy):
     return jsonWrapper(retlist, isCursor=0), 200
 
 
-@app.route('/totals/<strategy>')
-def genTotals(strategy):
+@app.route('/totals/<strategy>/<theme>')
+def genTotals(strategy, theme):
     totals = dict()
     trades = list(tradeDb[strategy].find(
         filter={}
@@ -222,33 +222,39 @@ def genTotals(strategy):
     totals['won'] = [len(wins), "none"]
     totals['lost'] = [len(loses), "none"]
     best = max([x['total'] for x in trades])
-    totals['best'] = [best, gradients.findColor(-150, 300, best)]
+    totals['best'] = [best, gradients.findColor(-150, 300, best, theme)]
     worst = min([x['total'] for x in trades])
-    totals['worst'] = [abs(worst), gradients.findColor(-150, 300, worst)]
+    totals['worst'] = [abs(worst), gradients.findColor(
+        -150, 300, worst, theme)]
     avgwin = sum(wins) / len(wins)
-    totals['avgwin'] = [int(avgwin), gradients.findColor(worst, best, avgwin)]
+    totals['avgwin'] = [int(avgwin), gradients.findColor(
+        worst, best, avgwin, theme)]
     avgloss = sum(loses) / len(loses)
     totals['avgloss'] = [abs(int(avgloss)), gradients.findColor(
-        worst, best, avgloss)]
+        worst, best, avgloss, theme)]
     shortwr = len(shortwins) / len(shorts)
     totals['shortwr'] = [int(shortwr * 100), gradients.findColor(
-        0, 1, shortwr)]
+        0, 1, shortwr, theme)]
     longwr = len(longwins) / len(longs)
     totals['longwr'] = [int(longwr * 100), gradients.findColor(
-        0, 1, longwr)]
+        0, 1, longwr, theme)]
     winrate = len(wins) / len(trades)
     totals['winrate'] = [int(winrate * 100), gradients.findColor(
-        0, 1, winrate)]
+        0, 1, winrate, theme)]
     roi = int(((sum(wins) + sum(loses)) / 2500) * 100)
-    totals['roi'] = [roi, gradients.findColor(0, 100, roi)]
+    totals['roi'] = [roi, gradients.findColor(0, 100, roi, theme)]
     rredge = int(avgwin + avgloss)
-    totals['rredge'] = [rredge, gradients.findColor(worst, best, rredge)]
+    totals['rredge'] = [rredge, gradients.findColor(
+        worst, best, rredge, theme)]
     expect = int(winrate * avgwin + ((1 - winrate) * avgloss))
-    totals['expect'] = [expect, gradients.findColor(avgloss, avgwin, expect)]
+    totals['expect'] = [expect, gradients.findColor(
+        avgloss, avgwin, expect, theme)]
     monthly = int(expect * 5 * 4)
-    totals['monthly'] = [monthly, gradients.findColor(-500, 1500, monthly)]
+    totals['monthly'] = [monthly, gradients.findColor(
+        -500, 1500, monthly, theme)]
     balance = int(2500 + sum(wins) + sum(loses))
-    totals['balance'] = [balance, gradients.findColor(0, 5000, balance)]
+    totals['balance'] = [balance, gradients.findColor(
+        0, 5000, balance, theme)]
     return jsonWrapper(totals, isCursor=0), 200
 
 
