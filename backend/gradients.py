@@ -1,15 +1,21 @@
 from __future__ import division
 from colour import Color
 
-red = Color(rgb=(86/255, 77/255, 143/255))
-yellow = Color(rgb=(170/255, 83/255, 151/255))
-green = Color(rgb=(233/255, 145/255, 45/255))
-
-ry = red.range_to(yellow, 30)
-yg = yellow.range_to(green, 30)
-gradient = [red.hex] + [x.hex for x in ry] + [yellow.hex] + \
-           [x.hex for x in yg] + [green.hex]
-
+gradient = [
+    "#8701e8",
+    "#9805DC",
+    "#9e06d7",
+    "#a909cf",
+    "#c00ebf",
+    "#d813ad",
+    "#f81a96",
+    "#ff2f76",
+    "#ff346f",
+    "#ff4458",
+    "#ff5048",
+    "#ff5a39",
+    "#ff622e",
+    "#ff6c20",]
 
 def findColor(low, high, val):
     spread = high - low
@@ -23,4 +29,5 @@ def findColor(low, high, val):
         return gradient[-1]
 
 if __name__ == "__main__":
-    print findColor(-100, 200, -130)
+    print gradient
+    print findColor(0, 690, 595)
